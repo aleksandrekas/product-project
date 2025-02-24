@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: "Raleway", serif;
+}
+
+
+
+/* navbarr styles */
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    padding: 0 10rem;
+}
+
+.navbar img{
+    width: 20px;
+    height: 200px;
+}
+
+
+.navbar .logo{
+    width: 41px;
+    height: 41px;
+}
+
+.navLinks a{
+    color: black;
+    text-decoration: none;
+    padding: 0 1rem 1rem 1rem;
+    font-weight: 600;
+
+}
+
+.active{
+    color: #5ECE7B !important;
+    border-bottom: 3px solid #5ECE7B;
+
+}
+
+
