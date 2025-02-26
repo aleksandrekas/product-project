@@ -13,7 +13,7 @@ export default function NavBar(){
                 <NavLink to='tech'>TECH</NavLink>
             </div>
             <img className='logo'  src="src\assets\a-logo.svg" alt="logo" />
-            <img src="src\assets\Empty Cart.svg" alt="logo" />
+            <button><img src="src\assets\Empty Cart.svg" alt="logo" /></button>
         </nav>
     )
 }

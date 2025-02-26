@@ -3,8 +3,8 @@
 
 export default function ClothItems(){
     return (
-        <div>
-            clothes
+        <div className="container">
+            <h1>Clothes</h1>
         </div>
     )
 }

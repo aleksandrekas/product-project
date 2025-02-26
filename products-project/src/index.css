@@ -32,6 +32,7 @@ body{
 .navbar .logo{
     width: 41px;
     height: 41px;
+    transform: translateX(-100px);
 }
 
 .navLinks a{
@@ -39,7 +40,6 @@ body{
     text-decoration: none;
     padding: 0 1rem 1rem 1rem;
     font-weight: 600;
-
 }
 
 .active{
@@ -48,4 +48,90 @@ body{
 
 }
 
+.navbar button{
+    width: 20px;
+    height: 20px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    cursor: pointer;
+}
 
+
+
+
+
+/* items body style */
+
+.container{
+    width: 100%;
+    padding: 3rem 10rem;
+}
+
+.container h1{
+    font-weight: 300;
+}
+
+.itemsListed{
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+
+
+
+
+/* product items styles */
+
+.productItem{
+    position: relative;
+    padding: 1rem;
+    width: 386px;
+    height: 444px;
+    margin: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+}
+
+.productItem:hover{
+    box-shadow:0 0 7px 7px #A8ACB030;
+}
+
+.productItem:hover button{
+    display: flex !important;
+}
+
+.productItem img{
+    /* width: 50%; */
+    height: 300px;
+    margin: auto;
+}
+
+.productItem button{
+    position: absolute;
+    bottom: 72px;
+    right: 42px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: #5ECE7B;
+    cursor: pointer;
+}
+
+.productItem button img{
+    width: 24px;
+    height: 24px;
+    color: white;
+}
