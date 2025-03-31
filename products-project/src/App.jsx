@@ -22,6 +22,7 @@ function App() {
                       id
                       name
                       price
+                      in_stock
                       images{
                         id 
                         image_url

@@ -42,6 +42,7 @@ export default function ItemsPage({query,pageTitle}){
             {products.map((item) => (
                 <ProductItem
                 key={item.id}
+                stock={item.in_stock}
                 imageUrl={item.images?.[0]?.image_url || "default-image-url.jpg"}
                 title={item.name}
                 price={item.price}
