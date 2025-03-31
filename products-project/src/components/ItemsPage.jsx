@@ -7,7 +7,7 @@ export default function ItemsPage({query,pageTitle}){
     async function fetchProducts(query) {
 
         try {
-          const response = await fetch("http://localhost/graph/index.php", {
+          const response = await fetch("http://localhost:4000/index.js", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -32,6 +32,9 @@ export default function ItemsPage({query,pageTitle}){
         fetchProducts(query);
     }, []);
 
+
+    console.log(products);
+
     return (
         <div className="container">
           <h1>{pageTitle}</h1>
@@ -41,7 +44,7 @@ export default function ItemsPage({query,pageTitle}){
                 key={item.id}
                 imageUrl={item.images?.[0]?.image_url || "default-image-url.jpg"}
                 title={item.name}
-                price={item.amount}
+                price={item.price}
                 />
             ))}
           </div>

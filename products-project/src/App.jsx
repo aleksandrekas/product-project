@@ -18,18 +18,12 @@ function App() {
                 query={
                   `
                   {
-                    products {
+                    products{
                       id
                       name
-                      in_stock
-                      description
-                      category
-                      brand
-                      amount
-                      currency_symbol
-                      images {
-                        id
-                        product_id
+                      price
+                      images{
+                        id 
                         image_url
                       }
                     }
