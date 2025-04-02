@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
 
-export default function ItemsPage({category,pageTitle}){
+export default function AllItems(){
     const [products, setProducts] = useState([]);
 
-    const query = `
-      query($category: String!){
-        productByCategory(category: $category) {
+    const query=
+      `
+      query{
+        products{
           id
           name
-          category
-          in_stock
           price
+          in_stock
           images{
             id
             image_url
@@ -21,7 +21,7 @@ export default function ItemsPage({category,pageTitle}){
     `
 
 
-    async function fetchProducts(query) {
+    async function fetchProducts() {
 
 
         try {
@@ -30,9 +30,7 @@ export default function ItemsPage({category,pageTitle}){
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ 
-              query,
-              variables:{category}}),
+            body: JSON.stringify({ query }),
           });
     
           const result = await response.json();
@@ -40,8 +38,8 @@ export default function ItemsPage({category,pageTitle}){
           if (result.errors) {
             console.error("GraphQL Errors:", result.errors);
           } else {
-            setProducts(result.data.productByCategory); 
-          }
+            setProducts(result.data.products); 
+          } 
         } catch (error) {
           console.error("Fetch Error:", error);
         }
@@ -49,15 +47,15 @@ export default function ItemsPage({category,pageTitle}){
 
 
     useEffect(() => {
-        fetchProducts(query);
-    }, [category]);
+        fetchProducts();
+    }, []);
 
 
     console.log(products);
 
     return (
         <div className="container">
-          <h1>{pageTitle}</h1>
+          <h1>ALL ITEMS</h1>
           <div className="itemsListed">
             {products.map((item) => (
                 <ProductItem

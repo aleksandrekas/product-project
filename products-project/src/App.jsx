@@ -1,9 +1,8 @@
 import { BrowserRouter,Routes,Route } from "react-router-dom"
 import NavBar from "./components/NavBar"
-import ClothItems from "./components/ClothItems"
-import TechItems from "./components/TechItems"
+import AllItems from "./components/AllItems"
 import ItemsPage from "./components/ItemsPage"
-
+import SingleItem from "./components/SingleItem"
 
 
 function App() {
@@ -13,28 +12,11 @@ function App() {
         <NavBar/>
           <Routes>
             <Route index element={
-              <ItemsPage
-              pageTitle={"All Items"}
-                query={
-                  `
-                  {
-                    products{
-                      id
-                      name
-                      price
-                      in_stock
-                      images{
-                        id 
-                        image_url
-                      }
-                    }
-                  }
-                `
-                }
-              />
+                <AllItems/>
               } />
-            <Route path="clothes" element={<ClothItems/>} />
-            <Route path="tech" element={<TechItems/>} />
+            <Route path="clothes" element={<ItemsPage category={"clothes"} pageTitle={"CLOTHES"}/>} />
+            <Route path="tech" element={<ItemsPage category={"tech"} pageTitle={"TECH"}/>} />
+            <Route path="singleItem"  element={<SingleItem />} />
           </Routes>
       </main>
     </BrowserRouter>
