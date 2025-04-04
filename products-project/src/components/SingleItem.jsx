@@ -69,7 +69,15 @@ export default function SingleItem() {
   }, [itemId]); 
 
 
-
+  function addIndex() {
+    setIndex(prev => (prev === product.images.length - 1 ? 0 : prev + 1));
+  }
+  
+  function substractIndex() {
+    setIndex(prev => (prev === 0 ? product.images.length - 1 : prev - 1));
+  }
+  
+  
 
 
 
@@ -93,13 +101,30 @@ export default function SingleItem() {
         </div>
         <div className="displayImageDiv">
           <div className="buttons">
-            <div></div>
-            <div></div>
+            <div style={{visibility: imageIndex === 0 ? "hidden":"visible"}} onClick={substractIndex}><img src="src\assets\CaretLeft.svg" alt="left" /></div>
+            <div style={{visibility: imageIndex === product.images.length - 1 ? "hidden":"visible"}}  onClick={addIndex}><img src="src\assets\CaretLeft.svg" alt="right" /></div>
           </div>
           <img className="displayImage" src={product.images[imageIndex].image_url} alt="" />
         </div>
       </div>
-      <div className="innerContainer"></div>
+      <div className="innerContainer right">
+          <h1>{product.name}</h1>
+          {product.attributes.map((atr)=>(
+            <div key={atr.id} className="attribute">
+              <h4>{atr.atr_name}</h4>
+              <div className="attrItems">
+                {atr.item.map((atrItem)=>(
+                  <div key={atrItem.id}>{atrItem.value}</div>
+                ))}
+              </div>
+            </div>
+          ))}
+          <div className="attributes"></div>
+          <h2>Price</h2>
+          <h4>${product.price}</h4>
+          <button>ADD TO CART</button>
+          <p className="itemDescription">{product.description}</p>
+      </div>
     </div>
   );
 }

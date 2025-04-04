@@ -193,9 +193,11 @@ body{
     flex-direction: column;
     margin-right: 2rem;
     height: 400px;
+    width: 86px;
+    overflow: hidden;
 }
 .imgSelectOptions{
-    width: 78px;
+    width: 75px;
     height: 80px;
     margin-bottom: 1rem;
     cursor: pointer;
@@ -250,7 +252,51 @@ body{
 .buttons div{
     width: 32px;
     height: 32px;
-    background-color: #000000BA
+    background-color: #000000BA;
     border-radius: 2px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons > div:first-child{
+    transform: rotate(180deg);
+}
+
+.right{
+    flex-direction: column;
+}
+
+
+.right h1{
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.right button{
+    width: 290px;
+    height: 50px;
+    font-size: 1rem;
+    background-color: #5ECE7B;
+    color: white;
+    border: none;
+}
+
+
+.attrItems{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.attrItems div{
+    width: 64px;
+    height: 45px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 400;
 }
