@@ -183,7 +183,7 @@ body{
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     margin-top: 5rem;
 }
 .imageSelectors{
@@ -281,6 +281,7 @@ body{
     background-color: #5ECE7B;
     color: white;
     border: none;
+    margin: 0 0 1.5rem 0;
 }
 
 
@@ -299,4 +300,42 @@ body{
     align-items: center;
     font-size: 1rem;
     font-weight: 400;
+    margin-right: 0.6rem;
+    cursor: pointer;
+}
+
+.right h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.right h2{
+    font-size: 1rem;
+    margin: 0.8rem 0;
+}
+
+.right h4{
+    margin:0 0 1.5rem 0;
+}
+
+
+.color{
+    width: 50px !important;
+    height: 45px !important;
+    border: 2px solid rgb(156, 153, 153)  !important;
+}
+
+.right p {
+    width: 492px;
+    /* font-size: 0.7rem; */
+    /* font-weight: 600; */
+}
+
+
+ul{
+    list-style: none;
+}
+
+li{
+    margin-bottom: 0.5rem;
 }

@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function SingleItem() {
   const itemId = useSelector((state) => state.id);
   const [product, setProduct] = useState(null); 
   const [imageIndex,setIndex] = useState(0)
+  const imageRef = useRef([])
   const query = `
     query SingleItem($singleItemId: String) {
       singleItem(id: $singleItemId) {
@@ -70,13 +71,39 @@ export default function SingleItem() {
 
 
   function addIndex() {
-    setIndex(prev => (prev === product.images.length - 1 ? 0 : prev + 1));
+    setIndex((prev) => {
+      const nextIndex = prev === product.images.length - 1 ? 0 : prev + 1;
+      const el = imageRef.current[nextIndex]; 
+  
+      if (el) {
+        el.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'nearest',
+          block: 'nearest',
+        });
+      }
+  
+      return nextIndex;
+    });
   }
   
   function substractIndex() {
-    setIndex(prev => (prev === 0 ? product.images.length - 1 : prev - 1));
-  }
+    setIndex((prev) => {
+      const nextIndex = prev === 0 ? product.images.length - 1 : prev - 1;
+      const el = imageRef.current[nextIndex];
   
+      if (el) {
+        el.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'nearest',
+          block: 'nearest',
+        });
+      }
+  
+      return nextIndex;
+    });
+  }
+
   
 
 
@@ -94,7 +121,7 @@ export default function SingleItem() {
       <div className="innerContainer">
         <div className="imageSelectors">
           {product.images.map((item,index)=>(
-            <div onClick={()=> setIndex(index)} className={imageIndex === index ? "imgSelectOptions selected" : "imgSelectOptions"} >
+            <div ref={(el) => (imageRef.current[index] = el)} onClick={()=> setIndex(index)} className={imageIndex === index ? "imgSelectOptions selected" : "imgSelectOptions"} >
               <img key={item.id}  src={item.image_url} alt="" />
             </div>
           ))}
@@ -110,20 +137,25 @@ export default function SingleItem() {
       <div className="innerContainer right">
           <h1>{product.name}</h1>
           {product.attributes.map((atr)=>(
-            <div key={atr.id} className="attribute">
-              <h4>{atr.atr_name}</h4>
-              <div className="attrItems">
-                {atr.item.map((atrItem)=>(
-                  <div key={atrItem.id}>{atrItem.value}</div>
-                ))}
+            atr.atr_name != 'blank' && 
+              <div key={atr.id} className="attribute">
+                <h2>{atr.atr_name.toUpperCase()}:</h2>
+                <div className="attrItems">
+                  {atr.item.map((atrItem)=>( 
+                    atr.atr_name === "color" ? (
+                      <div className="color" key={atrItem.id} style={{'backgroundColor' : atrItem.value,'border':'none'}}></div>
+                    ):(
+                      <div key={atrItem.id}>{atrItem.value.toUpperCase()}</div>
+                    )
+                  ))}
+                </div>
               </div>
-            </div>
+            
           ))}
-          <div className="attributes"></div>
-          <h2>Price</h2>
+          <h2>PRICE:</h2>
           <h4>${product.price}</h4>
           <button>ADD TO CART</button>
-          <p className="itemDescription">{product.description}</p>
+          <p dangerouslySetInnerHTML={{ __html:product.description }} className="itemDescription"></p>
       </div>
     </div>
   );
