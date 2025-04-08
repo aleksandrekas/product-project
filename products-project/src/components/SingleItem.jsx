@@ -15,6 +15,7 @@ export default function SingleItem() {
         category
         description
         price
+        in_stock
         images {
           id
           image_url
@@ -121,7 +122,7 @@ export default function SingleItem() {
       <div className="innerContainer">
         <div className="imageSelectors">
           {product.images.map((item,index)=>(
-            <div ref={(el) => (imageRef.current[index] = el)} onClick={()=> setIndex(index)} className={imageIndex === index ? "imgSelectOptions selected" : "imgSelectOptions"} >
+            <div ref={(el) => (imageRef.current[index] = el)}  className={imageIndex === index ? "imgSelectOptions selected" : "imgSelectOptions"} >
               <img key={item.id}  src={item.image_url} alt="" />
             </div>
           ))}
@@ -154,7 +155,11 @@ export default function SingleItem() {
           ))}
           <h2>PRICE:</h2>
           <h4>${product.price}</h4>
-          <button>ADD TO CART</button>
+          {product.in_stock ? (
+            <button>ADD TO CART</button>
+          ):(
+            <button style={{'backgroundColor' : "#777978"}}>OUT OF STOCK</button>
+          )}
           <p dangerouslySetInnerHTML={{ __html:product.description }} className="itemDescription"></p>
       </div>
     </div>
