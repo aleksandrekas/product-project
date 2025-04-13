@@ -3,8 +3,25 @@ import { useEffect, useRef, useState } from "react";
 
 export default function SingleItem() {
   const itemId = useSelector((state) => state.id);
-  const [product, setProduct] = useState(null); 
+  const [product, setProduct] = useState(null);
   const [imageIndex,setIndex] = useState(0)
+  const [storageattributes,setAttributes] = useState({}) 
+  
+  useEffect(() => {
+    if (product?.attributes) {
+      const defaults = product.attributes.reduce((acc, attr) => {
+        // pick first item as default, or set null if none
+        acc[attr.atr_name] = attr.item?.[0]?.value || null;
+        return acc;
+      }, {});
+      setAttributes(defaults);
+    }
+  }, [product]);
+  
+
+  
+  
+
   const imageRef = useRef([])
   const query = `
     query SingleItem($singleItemId: String) {
@@ -113,7 +130,7 @@ export default function SingleItem() {
     return <h1>Loading...</h1>; 
   }
 
-
+  console.log(storageattributes)
 
 
 
@@ -122,8 +139,8 @@ export default function SingleItem() {
       <div className="innerContainer">
         <div className="imageSelectors">
           {product.images.map((item,index)=>(
-            <div ref={(el) => (imageRef.current[index] = el)}  className={imageIndex === index ? "imgSelectOptions selected" : "imgSelectOptions"} >
-              <img key={item.id}  src={item.image_url} alt="" />
+            <div key={item.id} ref={(el) => (imageRef.current[index] = el)}  className={imageIndex === index ? "imgSelectOptions selected" : "imgSelectOptions"} >
+              <img   src={item.image_url} alt="" />
             </div>
           ))}
         </div>
@@ -142,13 +159,20 @@ export default function SingleItem() {
               <div key={atr.id} className="attribute">
                 <h2>{atr.atr_name.toUpperCase()}:</h2>
                 <div className="attrItems">
-                  {atr.item.map((atrItem)=>( 
-                    atr.atr_name === "color" ? (
-                      <div className="color" key={atrItem.id} style={{'backgroundColor' : atrItem.value,'border':'none'}}></div>
-                    ):(
-                      <div key={atrItem.id}>{atrItem.value.toUpperCase()}</div>
-                    )
-                  ))}
+                {atr.item.map((atrItem) => {
+                  const content = atr.atr_name === "color" ? (
+                    <div className={storageattributes.color === atrItem.value ? "color colorSelected":" color"} style={{ backgroundColor: atrItem.value, border: 'none' }}></div>
+                  ) : (
+                    <div className={storageattributes[atr.atr_name] === atrItem.value ? "attributeItem selectedAttribute" : "attributeItem"}>{atrItem.value.toUpperCase()}</div>
+                  );
+
+                  return (
+                    <div  key={atrItem.id}>
+                      {content}
+                    </div>
+                  );
+                })}
+
                 </div>
               </div>
             

@@ -49,8 +49,8 @@ body{
 }
 
 .navbar button{
-    width: 20px;
-    height: 20px;
+    width: 70px;
+    height: 70px;
     border: none;
     display: flex;
     justify-content: center;
@@ -200,7 +200,7 @@ body{
     width: 75px;
     height: 80px;
     margin-bottom: 1rem;
-    cursor: pointer;
+    /* cursor: pointer; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -283,6 +283,11 @@ body{
     color: white;
     border: none;
     margin: 0 0 1.5rem 0;
+    cursor: pointer;
+}
+
+.right button:hover{
+    background-color: #58e97f;
 }
 
 
@@ -292,10 +297,24 @@ body{
     align-items: center;
 }
 
-.attrItems div{
+.color{
+    width: 50px !important;
+    height: 45px !important;
+    border: 2px solid rgb(156, 153, 153) !important;
+    margin-right: 0.6rem;
+    cursor: pointer;
+}
+
+.colorSelected{
+    border: 2px solid rgb(0, 0, 0) !important;
+}
+
+
+
+.attrItems .attributeItem{
     width: 64px;
     height: 45px;
-    border: 1px solid black;
+    border: 1px solid black !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -303,6 +322,12 @@ body{
     font-weight: 400;
     margin-right: 0.6rem;
     cursor: pointer;
+}
+
+
+.selectedAttribute{
+    color: white;
+    background-color: black ;
 }
 
 .right h1 {
@@ -320,11 +345,6 @@ body{
 }
 
 
-.color{
-    width: 50px !important;
-    height: 45px !important;
-    border: 2px solid rgb(156, 153, 153)  !important;
-}
 
 .right p {
     width: 492px;
