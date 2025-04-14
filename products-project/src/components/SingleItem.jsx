@@ -10,7 +10,6 @@ export default function SingleItem() {
   useEffect(() => {
     if (product?.attributes) {
       const defaults = product.attributes.reduce((acc, attr) => {
-        // pick first item as default, or set null if none
         acc[attr.atr_name] = attr.item?.[0]?.value || null;
         return acc;
       }, {});
@@ -122,6 +121,12 @@ export default function SingleItem() {
     });
   }
 
+  function selectAttribute(atr,value){
+      setAttributes((prev)=>({
+        ...prev,
+        [atr]:value
+      }))
+  }
   
 
 
@@ -161,9 +166,9 @@ export default function SingleItem() {
                 <div className="attrItems">
                 {atr.item.map((atrItem) => {
                   const content = atr.atr_name === "color" ? (
-                    <div className={storageattributes.color === atrItem.value ? "color colorSelected":" color"} style={{ backgroundColor: atrItem.value, border: 'none' }}></div>
+                    <div onClick={()=> selectAttribute('color',atrItem.value)} className={storageattributes.color === atrItem.value ? "color colorSelected":" color"} style={{ backgroundColor: atrItem.value, border: 'none' }}></div>
                   ) : (
-                    <div className={storageattributes[atr.atr_name] === atrItem.value ? "attributeItem selectedAttribute" : "attributeItem"}>{atrItem.value.toUpperCase()}</div>
+                    <div onClick={()=> selectAttribute(atr.atr_name,atrItem.value)} className={storageattributes[atr.atr_name] === atrItem.value ? "attributeItem selectedAttribute" : "attributeItem"}>{atrItem.value.toUpperCase()}</div>
                   );
 
                   return (
