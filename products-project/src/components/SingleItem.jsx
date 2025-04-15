@@ -1,23 +1,46 @@
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
+import { addItem } from "../store/cartSlice";
+
 
 export default function SingleItem() {
   const itemId = useSelector((state) => state.id);
+  const cartState = useSelector((state) => state.cartItem);
+  const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
   const [imageIndex,setIndex] = useState(0)
-  const [storageattributes,setAttributes] = useState({}) 
+  const [storageproduct,setStorageProduct] = useState({
+    name:"",
+    price:"",
+    image:"",
+    attributes:{},
+    quantity: null
+  }) 
   
-  useEffect(() => {
+  useEffect(() => {      
     if (product?.attributes) {
       const defaults = product.attributes.reduce((acc, attr) => {
         acc[attr.atr_name] = attr.item?.[0]?.value || null;
         return acc;
       }, {});
-      setAttributes(defaults);
+
+      setStorageProduct({
+        name:product.name,
+        price:product.price,
+        image:product.images[0].image_url,
+        attributes:defaults,
+        quantity: 1
+      });
     }
+
+    
+
   }, [product]);
   
 
+  useEffect(() => {
+    localStorage.setItem('cartItem', JSON.stringify(cartState));
+  }, [cartState]);
   
   
 
@@ -121,21 +144,26 @@ export default function SingleItem() {
     });
   }
 
-  function selectAttribute(atr,value){
-      setAttributes((prev)=>({
-        ...prev,
-        [atr]:value
-      }))
+  function selectAttribute(atr, value) {
+    setStorageProduct((prev) => ({
+      ...prev,
+      attributes: {
+        ...prev.attributes,
+        [atr]: value
+      }
+    }));
   }
   
-
+  function addCartItem(){
+      dispatch(addItem(storageproduct))
+  }
 
 
   if (!product) {
     return <h1>Loading...</h1>; 
   }
 
-  console.log(storageattributes)
+  console.log(cartState)
 
 
 
@@ -166,9 +194,9 @@ export default function SingleItem() {
                 <div className="attrItems">
                 {atr.item.map((atrItem) => {
                   const content = atr.atr_name === "color" ? (
-                    <div onClick={()=> selectAttribute('color',atrItem.value)} className={storageattributes.color === atrItem.value ? "color colorSelected":" color"} style={{ backgroundColor: atrItem.value, border: 'none' }}></div>
+                    <div onClick={()=> selectAttribute('color',atrItem.value)} className={storageproduct.attributes.color === atrItem.value ? "color colorSelected":" color"} style={{ backgroundColor: atrItem.value, border: 'none' }}></div>
                   ) : (
-                    <div onClick={()=> selectAttribute(atr.atr_name,atrItem.value)} className={storageattributes[atr.atr_name] === atrItem.value ? "attributeItem selectedAttribute" : "attributeItem"}>{atrItem.value.toUpperCase()}</div>
+                    <div onClick={()=> selectAttribute(atr.atr_name,atrItem.value)} className={storageproduct.attributes[atr.atr_name] === atrItem.value ? "attributeItem selectedAttribute" : "attributeItem"}>{atrItem.value.toUpperCase()}</div>
                   );
 
                   return (
@@ -185,9 +213,9 @@ export default function SingleItem() {
           <h2>PRICE:</h2>
           <h4>${product.price}</h4>
           {product.in_stock ? (
-            <button>ADD TO CART</button>
+            <button onClick={addCartItem}>ADD TO CART</button>
           ):(
-            <button style={{'backgroundColor' : "#777978"}}>OUT OF STOCK</button>
+            <button  style={{'backgroundColor' : "#777978"}}>OUT OF STOCK</button>
           )}
           <p dangerouslySetInnerHTML={{ __html:product.description }} className="itemDescription"></p>
       </div>
