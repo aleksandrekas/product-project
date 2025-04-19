@@ -5,7 +5,7 @@ import { addItem } from "../store/cartSlice";
 
 export default function SingleItem() {
   const itemId = useSelector((state) => state.id);
-  const cartState = useSelector((state) => state.cartItem);
+  const cartState = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
   const [imageIndex,setIndex] = useState(0)
@@ -14,6 +14,7 @@ export default function SingleItem() {
     price:"",
     image:"",
     attributes:{},
+    selectedAttributes:{},
     quantity: null
   }) 
   
@@ -28,7 +29,8 @@ export default function SingleItem() {
         name:product.name,
         price:product.price,
         image:product.images[0].image_url,
-        attributes:defaults,
+        attributes:product.attributes,
+        selectedAttributes:defaults,
         quantity: 1
       });
     }
@@ -39,7 +41,7 @@ export default function SingleItem() {
   
 
   useEffect(() => {
-    localStorage.setItem('cartItem', JSON.stringify(cartState));
+    localStorage.setItem("cartItems", JSON.stringify(cartState));
   }, [cartState]);
   
   
@@ -147,8 +149,8 @@ export default function SingleItem() {
   function selectAttribute(atr, value) {
     setStorageProduct((prev) => ({
       ...prev,
-      attributes: {
-        ...prev.attributes,
+      selectedAttributes: {
+        ...prev.selectedAttributes,
         [atr]: value
       }
     }));
@@ -163,7 +165,7 @@ export default function SingleItem() {
     return <h1>Loading...</h1>; 
   }
 
-  console.log(cartState)
+  console.log(storageproduct)
 
 
 
@@ -194,9 +196,9 @@ export default function SingleItem() {
                 <div className="attrItems">
                 {atr.item.map((atrItem) => {
                   const content = atr.atr_name === "color" ? (
-                    <div onClick={()=> selectAttribute('color',atrItem.value)} className={storageproduct.attributes.color === atrItem.value ? "color colorSelected":" color"} style={{ backgroundColor: atrItem.value, border: 'none' }}></div>
+                    <div onClick={()=> selectAttribute('color',atrItem.value)} className={storageproduct.selectedAttributes.color === atrItem.value ? "color colorSelected":" color"} style={{ backgroundColor: atrItem.value, border: 'none' }}></div>
                   ) : (
-                    <div onClick={()=> selectAttribute(atr.atr_name,atrItem.value)} className={storageproduct.attributes[atr.atr_name] === atrItem.value ? "attributeItem selectedAttribute" : "attributeItem"}>{atrItem.value.toUpperCase()}</div>
+                    <div onClick={()=> selectAttribute(atr.atr_name,atrItem.value)} className={storageproduct.selectedAttributes[atr.atr_name] === atrItem.value ? "attributeItem selectedAttribute" : "attributeItem"}>{atrItem.value.toUpperCase()}</div>
                   );
 
                   return (
