@@ -1,18 +1,37 @@
 
 
-export default function CartItem({name,price,image,attributes,selectedAttribute}){
+export default function CartItem({name,price,image,attributes,selectedAttribute,quantity}){
     return (
         <div className="cartItem">
             <div className="cartLeft">
                 <div className="itemInfo">
                     <h1>{name}</h1>
                     <h4>${price}</h4>
+                    {Array.isArray(attributes) && attributes.map((atr) => (
+                    atr.name !== 'blank' && (
+                        <div key={atr.id} className="cartAttribute">
+                        <h4>{atr.atr_name}:</h4>
+                        <div className="items">
+                            {atr.item.map((item) => {
+                            const content = atr.atr_name === 'color' ? (
+                                <div className={item.value === selectedAttribute ? 'cartColorSelected' : 'cartColorAtr'} style={{backgroundColor : item.value}}></div>
+                            ) : (
+                                <div className="cartAtr" >{item.value}</div>
+                            );
+                            return (
+                                <div className="cartAtrItem" key={item.id}>{content}</div>
+                            );
+                            })}
+                        </div>
+                        </div>
+                    )
+                    ))}
                 </div>
                 <div className="quantityControl">
                     <div className="plus">
                         <img src="src\assets\add-outline.svg" alt="" />
                     </div>
-                    <h4>1</h4>
+                    <h4>{quantity}</h4>
                     <div className="minus">
                         <img src="src\assets\remove-outline.svg" alt="" />
                     </div>

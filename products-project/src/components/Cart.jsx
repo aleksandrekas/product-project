@@ -1,6 +1,7 @@
 import CartItem from "./CartItem"
 import { useSelector,useDispatch } from "react-redux";
 
+
 export function Cart({status}){
     const cartItems = useSelector((state)=> state.cart.cartItems)
 
@@ -16,6 +17,9 @@ export function Cart({status}){
                             name={item.name}
                             price={item.price}
                             image={item.image}
+                            attributes={item.attributes}
+                            selectedAttribute={item.selectedAttribute}
+                            quantity={item.quantity}
                         />
                     ))}
                 </div>

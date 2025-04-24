@@ -51,7 +51,7 @@ export default function AllItems(){
     }, []);
 
 
-    console.log(products);
+    // console.log(products);
 
     return (
         <div className="container">

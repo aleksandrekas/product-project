@@ -53,7 +53,7 @@ export default function ItemsPage({category,pageTitle}){
     }, [category]);
 
 
-    console.log(products);
+    // console.log(products); 
 
     return (
         <div className="container">
