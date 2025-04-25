@@ -6,7 +6,7 @@ export default function CartItem({name,price,image,attributes,selectedAttribute,
             <div className="cartLeft">
                 <div className="itemInfo">
                     <h1>{name}</h1>
-                    <h4>${price}</h4>
+                    <h6>${price}</h6>
                     {Array.isArray(attributes) && attributes.map((atr) => (
                     atr.name !== 'blank' && (
                         <div key={atr.id} className="cartAttribute">
