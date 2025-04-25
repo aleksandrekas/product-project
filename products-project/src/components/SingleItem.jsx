@@ -165,7 +165,7 @@ export default function SingleItem() {
     return <h1>Loading...</h1>; 
   }
 
-  // console.log(storageproduct)
+  // console.log(storageproduct.selectedAttributes)
 
 
 

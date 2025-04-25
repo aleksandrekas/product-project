@@ -5,7 +5,6 @@ import { useSelector,useDispatch } from "react-redux";
 export function Cart({status}){
     const cartItems = useSelector((state)=> state.cart.cartItems)
 
-    console.log(cartItems.selectedAttribute)
     return (
         <div style={{display: status? 'block' : 'none'}} className="cartContainer">
             <div className="cart">
@@ -18,7 +17,7 @@ export function Cart({status}){
                             price={item.price}
                             image={item.image}
                             attributes={item.attributes}
-                            selectedAttribute={item.selectedAttribute}
+                            selectedAttribute={item.selectedAttributes}
                             quantity={item.quantity}
                         />
                     ))}
