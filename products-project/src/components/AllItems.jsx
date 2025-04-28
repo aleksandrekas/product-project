@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
+import { useDispatch } from "react-redux";
+
 
 export default function AllItems(){
     const [products, setProducts] = useState([]);
-
+    const dispatch = useDispatch()
     const query=
       `
       query{
@@ -48,10 +50,11 @@ export default function AllItems(){
 
     useEffect(() => {
         fetchProducts();
+
     }, []);
 
 
-    // console.log(products);
+
 
     return (
         <div className="container">

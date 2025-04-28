@@ -1,6 +1,6 @@
 import { useSelector,useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
-import { addItem } from "../store/cartSlice";
+import { addItem ,updateTotalItems } from "../store/cartSlice";
 
 
 export default function SingleItem() {
@@ -158,6 +158,8 @@ export default function SingleItem() {
   
   function addCartItem(){
       dispatch(addItem(storageproduct))
+ 
+      
   }
 
 
@@ -165,7 +167,7 @@ export default function SingleItem() {
     return <h1>Loading...</h1>; 
   }
 
-  // console.log(storageproduct.selectedAttributes)
+
 
 
 

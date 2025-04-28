@@ -2,7 +2,7 @@
 
 export default function CartItem({name,price,image,attributes,selectedAttribute,quantity}){
 
-    console.log(selectedAttribute)
+ 
 
     return (
         <div className="cartItem">
@@ -11,26 +11,26 @@ export default function CartItem({name,price,image,attributes,selectedAttribute,
                     <h1>{name}</h1>
                     <h6>${price}</h6>
                     {Array.isArray(attributes) && attributes.map((atr) => (
-                    atr.name != 'blank' && (
-                        <div key={atr.id} className="cartAttribute">
-                        <h4>{atr.atr_name}:</h4>
-                        <div className="items">
-                            {atr.item.map((item) => {
-                                const isSelected = selectedAttribute?.[atr.atr_name] === item.value;
-                                const content = atr.atr_name === 'color' ? (
-                                    <div
-                                      className={isSelected ? 'cartColorSelected' : 'cartColorAtr'}
-                                      style={{ backgroundColor: item.value }}
-                                    />
-                                  ) : (
-                                    <div className={isSelected ? "cartAtr chosen" : "cartAtr"}>{item.value}</div>
-                                  );
-                                return (
-                                    <div className="cartAtrItem" key={item.id}>{content}</div>
-                                );
-                            })}
-                        </div>
-                        </div>
+                        atr.atr_name != 'blank' && (
+                            <div key={atr.id} className="cartAttribute">
+                            <h4>{atr.atr_name}:</h4>
+                            <div className="items">
+                                {atr.item.map((item) => {
+                                    const isSelected = selectedAttribute?.[atr.atr_name] === item.value;
+                                    const content = atr.atr_name === 'color' ? (
+                                        <div
+                                        className={isSelected ? 'cartColorSelected' : 'cartColorAtr'}
+                                        style={{ backgroundColor: item.value }}
+                                        />
+                                    ) : (
+                                        <div className={isSelected ? "cartAtr chosen" : "cartAtr"}>{item.value}</div>
+                                    );
+                                    return (
+                                        <div className="cartAtrItem" key={item.id}>{content}</div>
+                                    );
+                                })}
+                            </div>
+                            </div>
                     )
                     ))}
                 </div>

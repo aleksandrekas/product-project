@@ -20,7 +20,7 @@ export default function NavBar(){
                 <NavLink to='tech'>TECH</NavLink>
             </div>
             <img className='logo'  src="src\assets\a-logo.svg" alt="logo" />
-            <button onClick={handleCartBtn}><img src="src\assets\Empty Cart.svg" alt="logo" /></button>
+            <button className='cartBtn' onClick={handleCartBtn}><img src="src\assets\Empty Cart.svg" alt="logo" /></button>
             <Cart status={cartStatus} />
         </nav>
     )
