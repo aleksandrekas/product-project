@@ -35,23 +35,30 @@ export function Cart({status}){
             <div className="cart">
                 <h1>My Bag,{amount.amount} Items</h1>
                 <div className="itemContainer">
-                    {cartItems.map((item,index)=>(
-                        <CartItem
-                            key={index}
-                            name={item.name}
-                            price={item.price}
-                            image={item.image}
-                            attributes={item.attributes}
-                            selectedAttribute={item.selectedAttributes}
-                            quantity={item.quantity}
-                        />
-                    ))}
+                    {amount.amount !==0 ? (
+                        cartItems.map((item,index)=>(
+                            <CartItem
+                                key={index}
+                                name={item.name}
+                                price={item.price}
+                                image={item.image}
+                                attributes={item.attributes}
+                                selectedAttribute={item.selectedAttributes}
+                                quantity={item.quantity}
+                            />
+                        ))
+
+                    ):(
+                        <div className="emptyCart">
+                            CART IS EMPTY
+                        </div>
+                    )}
                 </div>
                 <div className="sumAmount">
                     <h5>Total</h5>
                     <h5>${amount.totalPrice}</h5>
                 </div>
-                <button className="placeOrderBtn">PLACE ORDER</button>
+                <button style={{backgroundColor: amount.amount === 0? "#94979c" : "#5ECE7B"}} className="placeOrderBtn">PLACE ORDER</button>
             </div>
         </div>
     )

@@ -22,13 +22,16 @@ body{
 
 /* navbarr styles */
 .navbar{
-    position: relative;
+    position: fixed;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 80px;
     width: 100%;
     padding: 0 10rem;
+    z-index: 2;
+    background-color: white;
 }
 
 .navbar img{
@@ -71,7 +74,7 @@ body{
 
 
 .cartContainer{
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 80px;
     width: 100%;
@@ -211,13 +214,21 @@ body{
 .placeOrderBtn{
     width: 100% ;
     height: 50px ;
-    background-color: #5ECE7B;
     border: none;
     color: white;
     cursor: pointer;
 }
 
 
+.emptyCart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 2rem;
+    color: #94979c;
+}
 
 
 .sumAmount{
@@ -235,6 +246,7 @@ body{
 .container{
     width: 100%;
     padding: 3rem 10rem;
+    margin-top: 80px;
 }
 
 .container h1{
@@ -332,7 +344,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: start;
-    margin-top: 5rem;
+    margin-top: 8rem;
 }
 .imageSelectors{
     display: flex;

@@ -158,6 +158,7 @@ export default function SingleItem() {
   
   function addCartItem(){
       dispatch(addItem(storageproduct))
+      dispatch(updateTotalItems())
  
       
   }
