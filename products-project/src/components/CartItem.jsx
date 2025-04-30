@@ -1,8 +1,30 @@
+import { removeQuantity,updateTotalItems,addQuantity } from "../store/cartSlice";
+import { useDispatch } from "react-redux";
 
 
 export default function CartItem({name,price,image,attributes,selectedAttribute,quantity}){
+    const dispatch = useDispatch();
+    
+    
+    function removeItemQuantity(){
+        let item = {
+            name:name,
+            selectedAttributes:selectedAttribute
+        }
 
- 
+        dispatch(removeQuantity(item))
+        dispatch(updateTotalItems())
+    }
+
+
+    function addItemQuantity(){
+        let item = {
+            name:name,
+            selectedAttributes:selectedAttribute
+        }
+        dispatch(addQuantity(item))
+        dispatch(updateTotalItems())
+    }
 
     return (
         <div className="cartItem">
@@ -35,11 +57,11 @@ export default function CartItem({name,price,image,attributes,selectedAttribute,
                     ))}
                 </div>
                 <div className="quantityControl">
-                    <div className="plus">
+                    <div onClick={addItemQuantity} className="plus">
                         <img src="src\assets\add-outline.svg" alt="" />
                     </div>
                     <h4>{quantity}</h4>
-                    <div className="minus">
+                    <div onClick={removeItemQuantity} className="minus">
                         <img src="src\assets\remove-outline.svg" alt="" />
                     </div>
                 </div>
