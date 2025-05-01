@@ -28,7 +28,7 @@ export function Cart({status}){
  
 
 
-    console.log(cartItems)
+
 
     return (
         <div style={{display: status? 'block' : 'none'}} className="cartContainer">

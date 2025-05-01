@@ -14,6 +14,15 @@ export default function AllItems(){
           name
           price
           in_stock
+          attributes{
+            id
+            atr_name
+            item{
+              id
+              display_value
+              value
+            }
+          }
           images{
             id
             image_url
@@ -62,12 +71,8 @@ export default function AllItems(){
           <div className="itemsListed">
             {products.map((item) => (
                 <ProductItem
-                key={item.id}
-                stock={item.in_stock}
-                imageUrl={item.images?.[0]?.image_url || "default-image-url.jpg"}
-                title={item.name}
-                price={item.price}
-                productId={item.id}
+                  key={item.id}
+                  item={item}
                 />
             ))}
           </div>

@@ -1,10 +1,12 @@
+import { useParams } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { addItem ,updateTotalItems } from "../store/cartSlice";
 
 
 export default function SingleItem() {
-  const itemId = useSelector((state) => state.id);
+  const {id:itemId} = useParams()
+  // const itemId = useSelector((state) => state.id);
   const cartState = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
@@ -169,7 +171,7 @@ export default function SingleItem() {
   }
 
 
-
+  
 
 
   return (
@@ -184,8 +186,8 @@ export default function SingleItem() {
         </div>
         <div className="displayImageDiv">
           <div className="buttons">
-            <div style={{visibility: imageIndex === 0 ? "hidden":"visible"}} onClick={substractIndex}><img src="src\assets\CaretLeft.svg" alt="left" /></div>
-            <div style={{visibility: imageIndex === product.images.length - 1 ? "hidden":"visible"}}  onClick={addIndex}><img src="src\assets\CaretLeft.svg" alt="right" /></div>
+            <div style={{visibility: imageIndex === 0 ? "hidden":"visible"}} onClick={substractIndex}><img src="/CaretLeft.svg" alt="left" /></div>
+            <div style={{visibility: imageIndex === product.images.length - 1 ? "hidden":"visible"}}  onClick={addIndex}><img src="/CaretLeft.svg" alt="right" /></div>
           </div>
           <img className="displayImage" src={product.images[imageIndex].image_url} alt="" />
         </div>

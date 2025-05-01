@@ -58,11 +58,11 @@ export default function CartItem({name,price,image,attributes,selectedAttribute,
                 </div>
                 <div className="quantityControl">
                     <div onClick={addItemQuantity} className="plus">
-                        <img src="src\assets\add-outline.svg" alt="" />
+                        <img src="/add-outline.svg" alt="" />
                     </div>
                     <h4>{quantity}</h4>
                     <div onClick={removeItemQuantity} className="minus">
-                        <img src="src\assets\remove-outline.svg" alt="" />
+                        <img src="/remove-outline.svg" alt="" />
                     </div>
                 </div>
             </div>

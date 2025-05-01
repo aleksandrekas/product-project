@@ -93,6 +93,10 @@ body{
     padding: 2rem 1rem;
 }
 
+.cart h1{
+    font-weight: 400;
+}
+
 .itemContainer{
     height: 80%;
     overflow-y: auto;

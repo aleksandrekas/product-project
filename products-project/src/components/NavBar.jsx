@@ -19,8 +19,8 @@ export default function NavBar(){
                 <NavLink to='clothes'>CLOTHES</NavLink>
                 <NavLink to='tech'>TECH</NavLink>
             </div>
-            <img className='logo'  src="src\assets\a-logo.svg" alt="logo" />
-            <button className='cartBtn' onClick={handleCartBtn}><img src="src\assets\Empty Cart.svg" alt="logo" /></button>
+            <img className='logo'  src="/a-logo.svg" alt="logo" />
+            <button className='cartBtn' onClick={handleCartBtn}><img src="/Empty Cart.svg" alt="logo" /></button>
             <Cart status={cartStatus} />
         </nav>
     )

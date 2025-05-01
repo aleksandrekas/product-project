@@ -16,7 +16,7 @@ function App() {
               } />
             <Route path="clothes" element={<ItemsPage category={"clothes"} pageTitle={"CLOTHES"}/>} />
             <Route path="tech" element={<ItemsPage category={"tech"} pageTitle={"TECH"}/>} />
-            <Route path="singleItem"  element={<SingleItem />} />
+            <Route path="singleItem/:id"  element={<SingleItem />} />
           </Routes>
       </main>
     </BrowserRouter>
