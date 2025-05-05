@@ -38,4 +38,4 @@ export default function ProducItem({item}){
             <button disabled={item.in_stock? false : true} onClick={add}  style={{background:item.in_stock? '#5ECE7B':'#777978'}} ><img  src="/Vector.svg" alt="" /></button>
         </div>
     )
-}
+}  
