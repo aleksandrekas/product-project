@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CartItem from "./CartItem"
 import { useSelector,useDispatch } from "react-redux";
-import { updateTotalItems } from "../store/cartSlice";
+import { updateTotalItems,clearCart } from "../store/cartSlice";
 
 
 export function Cart({status}){
@@ -25,7 +25,57 @@ export function Cart({status}){
     }, [cartItems]);
 
 
- 
+
+    async function placeOrder(){
+        const mutation = `
+        mutation PlaceOrder($items: [CartItemInput!]!) {
+          placeOrder(items: $items)
+        }`;
+
+        const variables = {
+            items: cartItems.map(item => ({
+              name: item.name,
+              price: item.price,
+              quantity: item.quantity,
+              selectedAttributes: Object.entries(item.selectedAttributes).map(
+                ([name, value]) => ({ name, value })
+              )
+            }))
+        };
+
+        
+
+        try{
+            const response = await fetch("http://localhost:4000/", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  query: mutation,
+                  variables
+                })
+            });
+
+            console.log("done",response)
+
+            if(response.ok){
+                localStorage.setItem("cartItems", JSON.stringify([]));
+                dispatch(clearCart())
+            }
+
+
+        }catch(error){
+            console.log(error)
+        }
+
+
+
+    }
+
+
+    console.log(cartItems)
+
 
 
 
@@ -58,7 +108,7 @@ export function Cart({status}){
                     <h5>Total</h5>
                     <h5>${amount.totalPrice}</h5>
                 </div>
-                <button style={{backgroundColor: amount.amount === 0? "#94979c" : "#5ECE7B"}} className="placeOrderBtn">PLACE ORDER</button>
+                <button onClick={placeOrder} style={{backgroundColor: amount.amount === 0? "#94979c" : "#5ECE7B"}} className="placeOrderBtn">PLACE ORDER</button>
             </div>
         </div>
     )
